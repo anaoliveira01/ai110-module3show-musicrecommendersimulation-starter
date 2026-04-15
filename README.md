@@ -208,3 +208,13 @@ What I learned:
 - It made clear that a recommender is mostly a scoring formula, and the weights are where all the real decisions live.
 - Human judgement still matters where the numbers don't capture context - whether a song fits a funeral or a road trip, whether an artist has said something harmful, whether a user is burned out on a genre they technically still "prefer", etc.
 The system also has no concept of enough — it will keep surfacing the same songs because they score well.
+
+
+## Demo:
+
+<img width="638" height="270" alt="Screenshot 2026-04-14 at 12 19 56 AM" src="https://github.com/user-attachments/assets/96ef582b-3e7a-47cd-8637-132d98dd6ed7" />
+
+<img width="687" height="471" alt="Screenshot 2026-04-14 at 1 10 11 AM" src="https://github.com/user-attachments/assets/71989d89-e462-40a3-a41a-50dff1bd32ed" />
+
+<img width="683" height="471" alt="Screenshot 2026-04-14 at 1 10 24 AM" src="https://github.com/user-attachments/assets/e757d648-ca8b-482a-8b81-f66e46f4b106" />
+
