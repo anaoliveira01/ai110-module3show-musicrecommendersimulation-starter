@@ -34,8 +34,6 @@ Some prompts to answer:
 - How do you choose which songs to recommend
   - The recommender scores every song, sorts them by descending score, and returns the top k songs as the final recommendation list.
 
-You can include a simple diagram or bullet list if helpful.
-
 ---
 
 ## Getting Started
@@ -88,15 +86,12 @@ Use this section to document the experiments you ran. For example:
 
 ## Limitations and Risks
 
-Summarize some limitations of your recommender.
-
-Examples:
-
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
-
-You will go deeper on this in your model card.
+- The catalog has only 18 songs, and 13 of 15 genres have exactly one entry — most users receive the same #1 result every time with no variation.
+- Mood weight (4.0) after adjusting dominates scoring so heavily that a pop song (Gym Hero) consistently outranks metal songs for a user asking for rock due to a shared mood tag.
+- The system has no memory — it never learns from what a user has already heard, skipped, or liked, so recommendations never improve over time.
+- All preferences are positive signals only; there is no way to say "no metal" or "nothing above 150 BPM," so disliked songs can still rank highly if their numeric attributes happen to match.
+- A user can only express one genre and one mood, so someone who listens to both jazz and lofi gets no credit for their second preference.
+- Features like artist, release year, lyrics language, and listening context (workout, sleep, commute) are not represented in the dataset.
 
 ---
 
@@ -106,10 +101,11 @@ Read and complete `model_card.md`:
 
 [**Model Card**](model_card.md)
 
-Write 1 to 2 paragraphs here about what you learned:
+How recommenders turn data into predictions:
+- Building this system made it clear that a recommender is mostly a scoring formula, and the weights are what makes a real difference. Every time the mood weight of 4.0 pushed a pop song above a metal song for a rock user, it was exactly what the numbers were meant to do. The "intelligence" of the system lives entirely in how the weights are set, and those choices are made by a person before any user opens the app.
 
-- about how recommenders turn data into predictions
-- about where bias or unfairness could show up in systems like this
+Where bias or unfairness could show up in systems like this:
+- The bias that stood out most was how catalog size silently shapes results. Thirteen of fifteen genres had only one song, so users preferring jazz or classical had no choice but to get the same result every session — no weight tuning could fix that. Real systems like Spotify face the same issue at scale: popular content gets recommended more, which makes it more popular, which gets it recommended more, all before any individual user has any influence.
 
 
 ---
@@ -123,9 +119,7 @@ Combines reflection and model card framing from the Module 3 guidance. :contentR
 
 ## 1. Model Name
 
-Give your recommender a name, for example:
-
-> VibeFinder 1.0
+> Music Matcher
 
 ---
 
@@ -134,56 +128,54 @@ Give your recommender a name, for example:
 - What is this system trying to do
 - Who is it for
 
-Example:
-
-> This model suggests 3 to 5 songs from a small catalog based on a user's preferred genre, mood, and energy level. It is for classroom exploration only, not for real users.
+This system recommends up to 5 songs from an 18-song catalog by scoring each song against a user's preferred genre, mood, energy level, and optional numeric targets (tempo, valence, danceability, and more). It is built for classroom exploration — to make the mechanics of a real recommender system tangible and testable — not for production use with real listeners.
 
 ---
 
 ## 3. How It Works (Short Explanation)
 
-Describe your scoring logic in plain language.
+Description of the scoring logic in plain language:
 
-- What features of each song does it consider
-- What information about the user does it use
-- How does it turn those into a number
+- What features of each song does it consider?
+  - Genre, mood, energy, tempo, valence (how positive or happy the song sounds), danceability, acousticness, liveness, speechiness, and instrumentalness.
 
-Try to avoid code in this section, treat it like an explanation to a non programmer.
+- What information about the user does it use?
+  - A favorite genre, a favorite mood, a target energy level, whether they prefer acoustic music, and optional targets for any of the numeric song features above.
+
+- How does it turn those into a number?
+  - It adds up points: a fixed bonus if the genre matches, a larger fixed bonus if the mood matches, and for each numeric preference the user set, a score between 0 and 1 based on how close the song's value is to the user's target. All those points are summed into one final score, and the five songs with the highest scores are returned.
+
+
 
 ---
 
 ## 4. Data
 
-Describe your dataset.
-
-- How many songs are in `data/songs.csv`
-- Did you add or remove any songs
-- What kinds of genres or moods are represented
-- Whose taste does this data mostly reflect
+The catalog contains 18 songs. I added 8 songs to the starter catalog containing only 10 — Golden Hour Strings, Sunset Highway, Dream City, Midnight Ember, Tropical Breeze, Soft Lanterns, Blue Velvet, and Velvet Nights — bringing the total to 18. Three additional audio features were also added to every song: liveness, speechiness, and instrumentalness.
+The added songs expanded the genre coverage to include classical, country, hip hop, metal, reggae, folk, blues, and r&b, and introduced new moods like nostalgic, peaceful, confident, rebellious, laid-back, soulful, and romantic that were absent from the starter set. Despite the expansion, the distribution is still uneven — lofi has 3 songs, pop has 2, and every other genre has exactly one. Users who prefer the added genres have a single fixed recommendation with not much variation.
+The catalog also skews toward Western, English-language genres and excludes non-Western music entirely, which means the data reflects a narrow slice of global musical taste.
 
 ---
 
 ## 5. Strengths
 
-Where does your recommender work well
+Where the recommender works well:
 
-You can think about:
-- Situations where the top results "felt right"
-- Particular user profiles it served well
-- Simplicity or transparency benefits
+- Profiles with many features set — the chill lofi profile (7 features: genre, mood, energy, tempo, valence, danceability, acousticness) produced the most convincing results. All five recommendations were genuinely low-energy, acoustic, and calm: Midnight Coding, Library Rain, Spacewalk Thoughts, Focus Flow, and Coffee Shop Stories. The extra features gave the scoring enough signal to differentiate songs meaningfully.
+- Niche genre users — despite the sparse catalog, users preferring jazz, classical, or reggae always received their single matching song as #1. The system didn't bury it or return something random; it correctly surfaced the best available match every time.
+- Explainability — every recommendation comes with a plain-language reason (e.g. "genre match (+2.5); mood match (+4.0); energy similarity (+1.96)"). It is always clear exactly why a song ranked where it did, which is rare in real recommender systems that use black-box models.
+- Simplicity — because the scoring is a straightforward weighted sum, it is easy to adjust. Changing a weight or adding a new preference takes one line of code and the effect is immediately traceable in the output.
 
 ---
 
 ## 6. Limitations and Bias
 
-Where does your recommender struggle
+Where the recommender struggles:
 
-Some prompts:
-- Does it ignore some genres or moods
-- Does it treat all users as if they have the same taste shape
-- Is it biased toward high energy or one genre by default
-- How could this be unfair if used in a real product
-
+- Mood weight dominates: the mood bonus (4.0) is large enough that a song with the right mood but the wrong genre consistently outranks songs with the right genre.
+- Single-song genres create filter bubbles — 13 of 15 genres have exactly one song. Users who prefer classical, blues, metal, reggae, jazz, country, folk, or r&b will repeatedly receive the same #1 result
+- One genre, one mood — the profile assumes every user has a single favorite genre and mood.
+- Unfair at scale — if this were a real product, users whose tastes fall outside pop and lofi would receive noticeably worse recommendations simply because less data exists for their genres.
 ---
 
 ## 7. Evaluation
