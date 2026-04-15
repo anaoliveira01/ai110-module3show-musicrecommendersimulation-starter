@@ -63,9 +63,18 @@ Prompts:
 
 Where the system struggles or behaves unfairly. 
 
+One weakness discovered during experiments for this system is that the new mood weight dominance creates a single-song bias because most of the moods listed are unique and not repeated. This means a user whose favorite_mood matches one of those rare moods will effectively always receive the same song as their top result, because no combination of genre, energy, or other numeric similarities can overcome a 4.0-point head start for the mood. For example, a user preferring "soulful" music will always see "Blue Velvet" ranked first, even if its tempo, valence, and energy are a poor fit.
+
+- Chill lofi had the most dramatic change — 4 out of 5 songs are completely different, and all 5 now fit the genre/mood/acoustic profile.
+- Starter and High energy pop share the same top 3, confirming the earlier finding that genre+mood lock in the ranking before numeric features can differentiate.
+- Deep intense rock now surfaces Storm Runner (#1) and Midnight Ember (#3) where before it had no genre-relevant songs at all.
+- The "before" list (Sunrise City through Gym Hero) was hardcoded CSV insertion order — it was the same for every user, making the system useless for personalization.
+
+
 Prompts:  
 
-- Features it does not consider  
+- Features it does not consider 
+    - 
 - Genres or moods that are underrepresented  
 - Cases where the system overfits to one preference  
 - Ways the scoring might unintentionally favor some users  
@@ -78,7 +87,9 @@ How you checked whether the recommender behaved as expected.
 
 Prompts:  
 
-- Which user profiles you tested  
+- Which user profiles you tested
+    - Four user profiles were tested with the 18-song catalog: a minimal "starter" profile with genre, mood, and energy only, a "high energy pop" profile, "chill lofi", and "deep intense rock". The most unexpected result came from the "deep intense rock" profile. Despite preferring rock music, "Gym Hero" - a pop song - ranked in 2nd place, beating out "Midnight Ember" - metal - because both share the "intense" mood tag.
+
 - What you looked for in the recommendations  
 - What surprised you  
 - Any simple tests or comparisons you ran  

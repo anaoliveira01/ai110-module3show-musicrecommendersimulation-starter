@@ -1,11 +1,19 @@
-id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
-1,Sunrise City,Neon Echo,pop,happy,0.82,118,0.84,0.79,0.18
-2,Midnight Coding,LoRoom,lofi,chill,0.42,78,0.56,0.62,0.71
-3,Storm Runner,Voltline,rock,intense,0.91,152,0.48,0.66,0.10
-4,Library Rain,Paper Lanterns,lofi,chill,0.35,72,0.60,0.58,0.86
-5,Gym Hero,Max Pulse,pop,intense,0.93,132,0.77,0.88,0.05
-6,Spacewalk Thoughts,Orbit Bloom,ambient,chill,0.28,60,0.65,0.41,0.92
-7,Coffee Shop Stories,Slow Stereo,jazz,relaxed,0.37,90,0.71,0.54,0.89
-8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22
-9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78
-10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35
+id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness,liveness,speechiness,instrumentalness
+1,Sunrise City,Neon Echo,pop,happy,0.82,118,0.84,0.79,0.18,0.12,0.06,0.00
+2,Midnight Coding,LoRoom,lofi,chill,0.42,78,0.56,0.62,0.71,0.08,0.04,0.32
+3,Storm Runner,Voltline,rock,intense,0.91,152,0.48,0.66,0.10,0.15,0.03,0.00
+4,Library Rain,Paper Lanterns,lofi,chill,0.35,72,0.60,0.58,0.86,0.05,0.03,0.28
+5,Gym Hero,Max Pulse,pop,intense,0.93,132,0.77,0.88,0.05,0.10,0.07,0.00
+6,Spacewalk Thoughts,Orbit Bloom,ambient,chill,0.28,60,0.65,0.41,0.92,0.14,0.02,0.82
+7,Coffee Shop Stories,Slow Stereo,jazz,relaxed,0.37,90,0.71,0.54,0.89,0.18,0.04,0.22
+8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22,0.11,0.05,0.01
+9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78,0.06,0.03,0.30
+10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35,0.09,0.06,0.01
+11,Golden Hour Strings,Velvet Dawn,classical,nostalgic,0.22,72,0.67,0.20,0.94,0.20,0.01,0.95
+12,Sunset Highway,Wild Prairie,country,peaceful,0.48,98,0.72,0.51,0.64,0.14,0.05,0.35
+13,Dream City,Rhythm Riot,hip hop,confident,0.88,130,0.55,0.80,0.18,0.13,0.40,0.00
+14,Midnight Ember,Neon Titan,metal,rebellious,0.95,146,0.32,0.58,0.08,0.08,0.04,0.00
+15,Tropical Breeze,Island Vibes,reggae,laid-back,0.55,86,0.77,0.65,0.78,0.17,0.06,0.10
+16,Soft Lanterns,Moonlit Folk,folk,peaceful,0.34,76,0.69,0.45,0.88,0.21,0.03,0.60
+17,Blue Velvet,Piano Whisper,blues,soulful,0.41,84,0.28,0.47,0.82,0.19,0.05,0.10
+18,Velvet Nights,Silk & Satin,r&b,romantic,0.67,102,0.88,0.75,0.32,0.12,0.28,0.00
