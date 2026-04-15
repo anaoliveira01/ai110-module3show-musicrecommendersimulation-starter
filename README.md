@@ -210,9 +210,9 @@ What I learned:
 The system also has no concept of enough — it will keep surfacing the same songs because they score well.
 
 
-## Demo:
+- Demo:
 
-<img width="638" height="270" alt="2026-04-14(3)" src="https://github.com/user-attachments/assets/6a35585f-7461-415b-be41-e46b0f41c06b" />
-<img width="683" height="471" alt="2026-04-14(2)" src="https://github.com/user-attachments/assets/301204c4-17ba-4061-8c10-98917ceb7313" />
-<img width="687" height="471" alt="2026-04-14(1)" src="https://github.com/user-attachments/assets/6696712b-c687-4638-ad82-45e02069a710" />
+![Screenshot 1](imgs/2026-04-14(1).png)
+![Screenshot 2](imgs/2026-04-14(2).png)
+![Screenshot 3](imgs/2026-04-14(3).png)
 
